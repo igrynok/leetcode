@@ -6,16 +6,15 @@ class Solution(object):
         :type shelfWidth: int
         :rtype: int
         """
-
         def min_height(i, current_width, current_height, memo):
 
             if (i, current_width, current_height) in memo:
                 return memo[(i, current_width, current_height)]
 
-            if i == len(books):
+            if i == (len(books)):
                 return current_height
 
-            min_h = 10 ** 9
+            min_h = 10**9
 
             if books[i][0] + current_width <= shelfWidth:
                 the_same_shelf = min_height(i + 1, books[i][0] + current_width, max(books[i][1], current_height), memo)
