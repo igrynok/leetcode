@@ -16,7 +16,7 @@ class Solution(object):
 
         def has_value(node, value):
 
-            if node == None:
+            if node is None:
                 return False
 
             if node.val == value:
