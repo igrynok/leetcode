@@ -1,5 +1,5 @@
 # Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given
-# target value. 
+# target value.
 class Solution(object):
     def searchRange(self, nums, target):
         """
@@ -8,31 +8,30 @@ class Solution(object):
         :rtype: List[int]
         """
 
-        left, right = 0, len(nums) - 1
-        first_index = -1
+        def binary_search(is_first):
+            left, right = 0, len(nums) - 1
+            first_index = -1
+            while left <= right:
+                mid = (left + right)//2
+                if nums[mid] == target:
+                    first_index = mid
+                    if is_first:
+                        right = mid - 1
+                    else:
+                        left = mid + 1
+                elif nums[mid] > target:
+                    right = mid - 1
+                else:
+                    left = mid + 1
 
-        while left <= right:
-            mid = (left + right)//2
-            if nums[mid] == target:
-                first_index = mid
-                right = mid - 1
-            elif nums[mid] > target:
-                right = mid - 1
-            else:
-                left = mid + 1
+            return first_index
 
         output = [-1, -1]
 
+        first_index = binary_search(True)
+
         if first_index > -1:
-
-            second_index = first_index
-
-            for i in range(first_index, len(nums)):
-                if nums[i] == target:
-                    second_index = i
-                else:
-                    break
-
+            second_index = binary_search(False)
             output = [first_index, second_index]
 
         return output
