@@ -11,34 +11,30 @@ class Solution(object):
         n = len(grid)
         max_dist = -1
 
+        queue = deque()
+        visited = set()
         for i in range(n):
             for j in range(n):
-                if grid[i][j] == 0:
-                    max_dist = max(self.bfs((i, j), grid, n), max_dist)
+                if grid[i][j] == 1:
+                    queue.append((i, j))
+                    visited.add((i, j))
 
-        return max_dist
+        if len(queue) == n*n:
+            return -1
 
-    def bfs(self, coord, grid, n):
-
-        queue = deque([coord])
-        min_dist = 1000
-        visited = {coord}
-
+        levels = -1
         while queue:
-            node = queue.popleft()
-            for child in self.get_neighbours(node, n):
-                if child in visited:
-                    continue
-                if grid[child[0]][child[1]] == 1:
-                    dist = abs(child[0] - coord[0]) + abs(child[1] - coord[1])
-                    if dist == 1:
-                        return 1
-                    else:
-                        min_dist = min(min_dist, dist)
-                visited.add(child)
-                queue.append(child)
+            levels += 1
+            level_nodes = len(queue)
+            for i in range(level_nodes):
+                node = queue.popleft()
+                for child in self.get_neighbours(node, n):
+                    if child in visited:
+                        continue
+                    queue.append(child)
+                    visited.add(child)
 
-        return min_dist if min_dist != 1000 else -1
+        return levels
 
     def get_neighbours(self, coord, n):
         result = []
