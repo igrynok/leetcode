@@ -9,8 +9,6 @@ class Solution(object):
         """
 
         n = len(grid)
-        max_dist = -1
-
         queue = deque()
         visited = set()
         for i in range(n):
