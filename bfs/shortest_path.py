@@ -17,9 +17,7 @@ class Solution(object):
             y = int(neighbour.imag)
 
             if 0 <= x < n and 0 <= y < n:
-                if value is None:
-                    answer.append((x, y))
-                elif grid[y][x] == value:
+                if value is None or grid[y][x] == value:
                     answer.append((y, x))
 
         return answer
@@ -49,10 +47,14 @@ class Solution(object):
 
         return list(visited)
 
-    def bfs(self, cell, grid, island):
+    def bfs(self, grid, island):
 
-        queue = deque([cell])
-        visited = {cell}
+        queue = deque()
+
+        for cell in island:
+            queue.append(cell)
+
+        visited = set(island)
         level = -1
 
         while queue:
@@ -76,9 +78,7 @@ class Solution(object):
         """
         island = self.find_island(grid)
 
-        shortest_path = 222
-        for cell in island:
-            shortest_path = min(self.bfs(cell, grid, island), shortest_path)
+        shortest_path = self.bfs(grid, island)
 
         return shortest_path
 
