@@ -9,9 +9,7 @@ class Solution(object):
         def dfs(used, seq):
 
             if sum(used) == 0:
-                zeros = [1 for elem in seq if elem == 0]
-                if sum(zeros) == 0:
-                    answer.append(seq[:])
+                answer.append(seq[:])
                 return
 
             for index, elem in enumerate(used):
@@ -41,8 +39,7 @@ class Solution(object):
         used = [1] * n
         seq = [0] * (1 + (n - 1) * 2)
         dfs(used, seq)
-        answer.sort(reverse=True)
-        return answer[0]
+        return max(answer)
 
 
 if __name__ == '__main__':
