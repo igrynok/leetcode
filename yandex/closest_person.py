@@ -17,7 +17,7 @@ class Solution:
         for i, seat in enumerate(seats):
             if seat == 1:
                 if prev != -1:
-                    max_dist = max(max_dist, int((i - prev)/2))
+                    max_dist = max(max_dist, (i - prev)//2)
                 else:
                     max_dist = i
                 prev = i
