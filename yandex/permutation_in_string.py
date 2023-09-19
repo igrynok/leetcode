@@ -21,7 +21,7 @@ class Solution:
         while fast < n2 + 1:
 
             if count == n1:
-                if (Counter(s2[fast-n1:fast]) - counter) == Counter():
+                if Counter(s2[fast-n1:fast]) == counter:
                     return True
                 else:
                     count -= 1
