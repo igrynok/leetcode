@@ -5,7 +5,7 @@ class Node:
         self.prev = None
         self.next = None
 
-
+# todo refactor architecture: break down move_to_head into insert and remove
 class LRUCache:
 
     def __init__(self, capacity: int):
