@@ -11,4 +11,14 @@ class Solution:
         """
         :rtype: int
         """
-        return int(rand7() / 7 * 10)
+        while True:
+
+            col = rand7()
+            row = rand7()
+
+            num = (row - 1) * 7 + col
+
+            if num <= 40:
+                break
+
+        return num % 10 + 1
