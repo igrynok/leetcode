@@ -17,12 +17,16 @@ class Solution:
         return self.search(root.right, node) or self.search(root.left, node)
 
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+
         result = root
 
         if not root:
             return None
 
-        is_left_node1 = self.search(root.left, p)
+        if root.val == p.val or root.val == q.val:
+            return result
+
+    is_left_node1 = self.search(root.left, p)
         is_left_node2 = self.search(root.left, q)
 
         if is_left_node1 and is_left_node2:
