@@ -17,7 +17,6 @@ class Solution:
             else:
                 letter_map[letter] = index
 
-
         window = letter_map[s[0]]
         answer = []
         anchor = 0
