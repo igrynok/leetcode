@@ -33,10 +33,8 @@ class Solution:
                 course = queue.popleft()
                 for next_course in out_degree[course]:
                     in_degree[next_course].remove(course)
+                    if len(in_degree[next_course]) == 0:
+                        queue.append(next_course)
                 del in_degree[course]
-
-            for c in in_degree:
-                if len(in_degree[c]) == 0:
-                    queue.append(c)
 
         return semesters if courses == 0 else -1
