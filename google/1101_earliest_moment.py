@@ -7,9 +7,8 @@ class Solution:
         logs.sort()
         friends_groups = []
 
-        for log in logs:
+        for ts, f1, f2 in logs:
 
-            f1, f2 = log[1], log[2]
             f1_group, f2_group = None, None
 
             for group in friends_groups:
@@ -32,6 +31,6 @@ class Solution:
                 f2_group.add(f1)
 
             if len(friends_groups) == 1 and len(friends_groups[0]) == n:
-                return log[0]
+                return ts
 
         return -1
