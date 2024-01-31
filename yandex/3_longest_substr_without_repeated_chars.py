@@ -12,32 +12,20 @@
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-
         if not s:
             return 0
 
-        slow, fast = 0, 0
-        max_sub = 0
-        letters = set()
+        subs_set = set()
+        max_subs = 0
+        left = 0
 
-        while fast < len(s):
+        for right, ch in enumerate(s):
+            if ch in subs_set:
+                while ch in subs_set:
+                    subs_set.remove(s[left])
+                    left += 1
+            subs_set.add(ch)
 
-            while fast < len(s) and not s[fast] in letters:
-                letters.add(s[fast])
-                fast += 1
+            max_subs = max(max_subs, right - left + 1)
 
-            max_sub = max(max_sub, fast - slow)
-
-            if fast == len(s):
-                return max_sub
-
-            repeated_letter = s[fast]
-
-            while s[slow] != repeated_letter:
-                letters.remove(s[slow])
-                slow += 1
-
-            letters.remove(s[slow])
-            slow += 1
-
-        return max_sub
+        return max_subs
