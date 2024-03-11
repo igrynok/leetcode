@@ -1,3 +1,6 @@
+from functools import cache
+
+
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
 
