@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
 
@@ -11,7 +14,7 @@ class Solution:
                 digits[i] = summed_digit
                 return digits
             else:
-                digits[i] = summed_digit%10
+                digits[i] = summed_digit % 10
                 if not i:
                     return [1] + digits
 
