@@ -6,22 +6,23 @@ class Solution:
     def findMissingRanges(self, nums: List[int], lower: int, upper: int) -> List[List[int]]:
 
         ranges = []
-        unique_nums = set(nums)
 
-        current = []
-        for num in range(lower, upper + 1):
-            if num in unique_nums:
-                if current:
-                    ranges.append(current.copy())
-                    current = []
-            else:
-                if not current:
-                    current.append(num)
-                    current.append(num)
-                else:
-                    current[-1] = num
+        if not nums:
+            return [[lower, upper]]
 
-        if current:
-            ranges.append(current.copy())
+        if lower == upper:
+            return []
+
+        if lower < nums[0]:
+            ranges.append([lower, nums[0] - 1])
+
+        l = nums[0]
+        for i in range(1, len(nums)):
+            if l != nums[i] and l != nums[i] - 1:
+                ranges.append([l + 1, nums[i] - 1])
+            l = nums[i]
+
+        if upper > nums[-1]:
+            ranges.append([nums[-1] + 1, upper])
 
         return ranges
