@@ -1,11 +1,10 @@
 class Solution:
     def backspaceCompare(self, s: str, t: str) -> bool:
 
-        def normalize(s):
-            norm = []
+        def next_ch(word, index):
             skip = 0
-            for elem in s[::-1]:
-                if elem == "#":
+            for i in range(index - 1, -1, -1):
+                if word[i] == '#':
                     skip += 1
                     continue
                 else:
@@ -13,8 +12,24 @@ class Solution:
                         skip -= 1
                         continue
                     else:
-                        norm.append(elem)
+                        return word[i], i
 
-            return ''.join(norm)
+            return "end", -1
 
-        return  normalize(s) == normalize(t)
+        i, j = len(s), len(t)
+        while i or j:
+
+            s_next_ch, i = next_ch(s, i)
+            t_next_ch, j = next_ch(t, j)
+
+            if i == -1 and j == -1:
+                return True
+            elif i == -1 or j == -1:
+                return False
+
+            if s_next_ch and t_next_ch and s_next_ch == t_next_ch:
+                continue
+            else:
+                return False
+
+        return True
