@@ -3,41 +3,49 @@ from typing import Optional
 
 
 class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-
+     def __init__(self, val=0, next=None):
+         self.val = val
+         self.next = next
 
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
 
-        i = 0
-        num1 = 0
-        node1 = l1
-        while node1:
-            num1 += node1.val*10**i
-            node1 = node1.next
-            i += 1
+        l1_node = l1
+        l2_node = l2
 
-        i = 0
-        num2 = 0
-        node2 = l2
-        while node2:
-            num2 += node2.val*10**i
-            node2 = node2.next
-            i += 1
+        dummy_head = ListNode()
+        l = dummy_head
+        extra = 0
 
-        total = num1 + num2
+        while l1_node or l2_node:
 
-        head = None
-        node = None
-        for ch in str(total)[::-1]:
-            if node:
-                l = ListNode(int(ch))
-                node.next = l
-                node = l
+            addition = 0
+
+            if l1_node and l2_node:
+                addition = l1_node.val + l2_node.val
+            elif l1_node:
+                addition = l1_node.val
+            elif l2_node:
+                addition = l2_node.val
+
+            addition += extra
+            new_node = ListNode()
+            if addition < 10:
+                new_node.val = addition
+                extra = 0
             else:
-                head = ListNode(int(ch))
-                node = head
+                new_node.val = addition%10
+                extra = 1
 
-        return head
+            l.next = new_node
+            l = new_node
+            if l1_node:
+                l1_node = l1_node.next
+
+            if l2_node:
+                l2_node = l2_node.next
+
+        if extra:
+            l.next = ListNode(1)
+
+        return dummy_head.next
