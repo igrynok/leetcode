@@ -12,8 +12,6 @@ class Solution:
         @cache
         def dfs(i, j):
 
-            nonlocal m
-            nonlocal n
             path_len = 0
 
             for d in dirs:
