@@ -1,14 +1,12 @@
 # Definition for a binary tree node.
+from typing import Optional
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
-
-
-import math
-from collections import deque
-
 
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
@@ -17,23 +15,22 @@ class Solution:
         :rtype: int
         """
 
+        diameter = 0
+
         def dfs(node):
+
+            nonlocal diameter
 
             if not node:
                 return 0
 
-            max_path = max(dfs(node.left), dfs(node.right))
+            left_path = dfs(node.left)
+            right_path = dfs(node.right)
 
-            return max_path + 1
+            diameter = max(diameter, left_path + right_path)
 
-        queue = deque([root])
-        max_length = -math.inf
+            return max(left_path, right_path) + 1
 
-        while queue:
-            n = queue.popleft()
-            max_length = max(max_length, dfs(n.left) + dfs(n.right))
-            for child in [n.left, n.right]:
-                if child:
-                    queue.append(child)
+        dfs(root)
 
-        return max_length
+        return diameter
