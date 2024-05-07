@@ -8,6 +8,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
+
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         """
@@ -18,7 +19,6 @@ class Solution:
         diameter = 0
 
         def dfs(node):
-
             nonlocal diameter
 
             if not node:
