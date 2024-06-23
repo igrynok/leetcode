@@ -5,13 +5,13 @@ from typing import List
 class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
 
-        prefix_dict = defaultdict(list)
+        prefix_dict = defaultdict(set)
         for word in words:
             for i in range(len(word)):
-                prefix_dict[word[:i + 1]].add(word)
+                prefix_dict[word[:i+1]].add(word)
+
 
         answer = []
-
         def dfs(prefix, cell):
 
             if not prefix in prefix_dict:
@@ -19,7 +19,7 @@ class Solution:
             elif prefix in prefix_dict[prefix]:
                 answer.append(prefix)
                 for i in range(len(prefix)):
-                    prefix_dict[prefix[:i + 1]].remove(prefix)
+                    prefix_dict[prefix[:i+1]].remove(prefix)
 
             letter = board[cell[1]][cell[0]]
             dirs = [(-1, 0), (1, 0), (0, 1), (0, -1)]
@@ -34,4 +34,4 @@ class Solution:
             for j in range(len(board[0])):
                 dfs(board[i][j], (j, i))
 
-        return answer
+        return answer                    
