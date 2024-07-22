@@ -11,14 +11,6 @@ class Solution:
 
         rows, cols = len(matrix), len(matrix[0])
 
-        def set_zeros(row, col):
-            if row != -1:
-                for k in range(cols):
-                    matrix[row][k] = 0
-            else:
-                for l in range(rows):
-                    matrix[l][col] = 0
-
         rows_set = set()
         cols_set = set()
 
@@ -28,10 +20,10 @@ class Solution:
                     cols_set.add(j)
                     rows_set.add(i)
 
-        for col in cols_set:
-            set_zeros(-1, col)
-        for row in rows_set:
-            set_zeros(row, -1)
+        for i in range(rows):
+            for j in range(cols):
+                if i in rows_set or j in cols_set:
+                    matrix[i][j] = 0
 
 
 if __name__ == "__main__":
