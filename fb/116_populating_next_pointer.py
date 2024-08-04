@@ -20,16 +20,12 @@ class Solution:
 
         while queue:
             n = len(queue)
-            level_nodes = []
             for i in range(n):
                 node = queue.popleft()
-                level_nodes.append(node)
+                if i < n - 1:
+                    node.next = queue[0]
                 for child in [node.left, node.right]:
                     if child:
                         queue.append(child)
-            prev = level_nodes[0]
-            for i in range(1, len(level_nodes)):
-                prev.next = level_nodes[i]
-                prev = level_nodes[i]
 
         return root
