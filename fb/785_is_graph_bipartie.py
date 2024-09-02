@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Solution(object):
     def isBipartite(self, graph):
         """
