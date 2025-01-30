@@ -8,7 +8,6 @@ class Solution:
             count = 1
             while index + count < len(s) and s[index] == s[index + count]:
                 count += 1
-            fix = index
             while count >= 3:
                 count -= 1
                 index += 1
