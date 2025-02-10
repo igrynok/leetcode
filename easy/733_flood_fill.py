@@ -1,3 +1,7 @@
+from collections import deque
+from typing import List
+
+
 class Solution:
 
     def get_neighbours(self, cell, image, old_color):
