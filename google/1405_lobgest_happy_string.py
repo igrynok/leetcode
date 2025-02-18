@@ -1,20 +1,30 @@
+import heapq
+from heapq import heapify
+
+
 class Solution:
     def longestDiverseString(self, a: int, b: int, c: int) -> str:
 
-        max_path = ""
+        heap = [(-a, 'a'), (-b, 'b'), (-c, 'c')]
+        heap = [(count, max_ch) for (count, max_ch) in heap if count != 0]
+        heapify(heap)
+        longest_str = ""
 
-        def dfs(path, a, b, c):
+        while heap:
+            count, ch = heapq.heappop(heap)
+            if len(longest_str) >= 2 and longest_str[-2:] == ch * 2:
+                if not heap:
+                    break
+                count2, ch2 = heapq.heappop(heap)
+                longest_str += ch2
+                count2 += 1
+                if count2 < 0:
+                    heapq.heappush(heap, (count2, ch2))
+                heapq.heappush(heap, (count, ch))
+            else:
+                longest_str += ch
+                count += 1
+                if count < 0:
+                    heapq.heappush(heap, (count, ch))
 
-            nonlocal max_path
-
-            if len(path) > len(max_path):
-                max_path = path
-
-            if a > 0 and (len(path) < 2 or path[-2:] != "aa"):
-                dfs(path + "a", a - 1, b, c)
-            if b > 0 and (len(path) < 2 or path[-2:] != "bb"):
-                dfs(path + "b", a, b - 1, c)
-            if c > 0 and (len(path) < 2 or path[-2:] != "cc"):
-                dfs(path + "c", a, b, c - 1)
-
-        dfs("", a, b, c)
+        return longest_str
