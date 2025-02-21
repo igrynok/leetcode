@@ -1,15 +1,12 @@
 from collections import Counter
-from heapq import heappush, heappop
+from heapq import heappush, heappop, heapify
 
 
 class Solution:
     def reorganizeString(self, s: str) -> str:
 
-        counter = Counter(s)
-        heap = []
-
-        for ch, count in counter.items():
-            heappush(heap, (-count, ch))
+        heap = [(-count, char) for char, count in Counter(s).items()]
+        heapify(heap)
 
         reorg_s = []
         while heap:
