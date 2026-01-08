@@ -1,9 +1,8 @@
 from collections import defaultdict, deque
-from typing import List
 
 
 class Solution:
-    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+    def validTree(self, n: int, edges: list[list[int]]) -> bool:
 
         if len(edges) != n - 1:
             return False
@@ -11,6 +10,7 @@ class Solution:
         adj = defaultdict(list)
         for u, v in edges:
             adj[u].append(v)
+            adj[v].append(u)
 
         visited = set()
         queue = deque([0])
