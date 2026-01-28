@@ -5,9 +5,6 @@ from typing import List
 class Solution:
     def minimumDifference(self, nums: List[int], k: int) -> int:
 
-        if not nums:
-            return None
-
         if len(nums) == 1:
             return 0
 
